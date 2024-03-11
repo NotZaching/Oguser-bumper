@@ -1,0 +1,8 @@
+py -3.11 -m pip install playwright
+
+py -3.11 -m playwright install --with-deps firefox
+
+py -3.11 -m pip install -r requirements.txt
+
+Python 3.11 Windows 64-bit installer:
+https://www.python.org/ftp/python/3.11.0/python-3.11.0-amd64.exe
