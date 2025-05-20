@@ -8,7 +8,7 @@ import subprocess
 
 # Resize window and set title
 os.system('mode con: cols=47 lines=9')
-os.system('title Flipd Bumper!')
+os.system('title oguser Bumper!')
 
 info_List = []
 try:
@@ -60,8 +60,8 @@ def parse_cf_clearance_from_json(file_path):
 
 
 def parse_cookie():
-    directory_path = r'C:/Users/zardo/Desktop/FlipdBumper/CF-Clearance-Scraper'
-    command = 'py main.py -d -v -f cookies.json https://flipd.gg'
+    directory_path = r'C:/Users/zardo/Desktop/oguserBumper/CF-Clearance-Scraper'
+    command = 'py main.py -d -v -f cookies.json https://oguser.gg'
     run_command_in_specific_directory(directory_path, command)
     file_path = os.path.join(directory_path, 'cookies.json')
     cf_clearance = parse_cf_clearance_from_json(file_path)
@@ -92,17 +92,17 @@ def main(cf_clearance):
             "Sec-Fetch-Mode": "navigate"
         })
 
-        response = session.get("https://flipd.gg/")
+        response = session.get("https://oguser.com/")
 
-        if (response.status_code == 200 and str(response.url) == 'https://flipd.gg/'):
-            print(f'Connected to flipd.gg!')
+        if (response.status_code == 200 and str(response.url) == 'https://oguser.com/'):
+            print(f'Connected to oguser.com!')
 
             paramsGet = {"action": "login"}
 
             response = session.get(
-                "https://flipd.gg/member.php", params=paramsGet)
+                "https://oguser.com/member.php", params=paramsGet)
 
-            if (response.status_code == 200 and str(response.url) == 'https://flipd.gg/member.php?action=login'):
+            if (response.status_code == 200 and str(response.url) == 'https://oguser.com/member.php?action=login'):
                 soup = BeautifulSoup(response.content, "html.parser")
                 my_post_key_val = soup.find(attrs={"name": "my_post_key"})
                 my_post_key = my_post_key_val["value"]
@@ -118,14 +118,14 @@ def main(cf_clearance):
                     "password": userPassword,
                     "action": "do_login",
                     "my_post_key": my_post_key,
-                    "url": "https://flipd.gg/",
+                    "url": "https://oguser.com/",
                     "username": userUsername
                 }
 
                 response = session.post(
-                    "https://flipd.gg/member.php", data=paramsPost)
+                    "https://oguser.com/member.php", data=paramsPost)
 
-                if (response.status_code == 200 and str(response.url) == 'https://flipd.gg/'):
+                if (response.status_code == 200 and str(response.url) == 'https://oguser.com/'):
                     print(
                         f"Log in to flipd user @{paramsPost['username']} success!")
 
@@ -173,7 +173,7 @@ def main(cf_clearance):
                                 "quoted_ids": ""
                             }
                             response = session.post(
-                                "https://flipd.gg/newreply.php", data=paramsPost, params=paramsGet)
+                                "https://oguser.com/newreply.php", data=paramsPost, params=paramsGet)
 
                             if ("pid" in str(response.url) and response.status_code == 200):
                                 bumpCount += 1
@@ -201,7 +201,7 @@ def main(cf_clearance):
                 break
 
         else:
-            print(f'Failed to connect to flipd.gg',
+            print(f'Failed to connect to oguser.com',
                   response.status_code, response.url)
             break
 
